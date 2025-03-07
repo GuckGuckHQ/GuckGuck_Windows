@@ -1,0 +1,39 @@
+﻿<Window x:Class="GuckGuck.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:local="clr-namespace:GuckGuck"
+	mc:Ignorable="d"
+	Title="MainWindow" Height="450" Width="800"
+	WindowStyle="None"
+	AllowsTransparency="True"
+	ResizeMode="CanResize">
+	<WindowChrome.WindowChrome>
+		<WindowChrome
+			CaptionHeight="1"
+			CornerRadius="0"
+			ResizeBorderThickness="4"
+			GlassFrameThickness="0" />
+	</WindowChrome.WindowChrome>
+	<Window.Background>
+		<SolidColorBrush Color="#FFB0B0B0"
+			Opacity="0.05" />
+	</Window.Background>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Border Grid.Row="0" Background="Gray" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+			<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
+				Foreground="White" />
+		</Border>
+		<Button Grid.Row="0" Content="Screenshot" HorizontalAlignment="Left" VerticalAlignment="Top"
+			Click="ScreenshotButton_Click" />
+		<Button Grid.Row="0" Content="Fullscreen Capture" HorizontalAlignment="Right"
+			VerticalAlignment="Top"
+			Click="FullscreenCaptureButton_Click" />
+		<Border x:Name="CaptureBorder" Grid.Row="1" BorderBrush="Black" BorderThickness="2" />
+	</Grid>
+</Window>
