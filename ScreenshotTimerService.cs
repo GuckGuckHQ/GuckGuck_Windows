@@ -11,9 +11,9 @@ namespace GuckGuck;
 public class ScreenshotTimerService : IDisposable
 {
 	private readonly Timer _timer;
-	private Rectangle _inputRect;
+	public Rectangle InputRect { get; set; }
 
-	public ScreenshotTimerService(double interval)
+    public ScreenshotTimerService(double interval)
 	{
 		_timer = new Timer(interval);
 		_timer.Elapsed += OnTimedEvent;
@@ -30,10 +30,6 @@ public class ScreenshotTimerService : IDisposable
 		_timer.Stop();
 	}
 
-	public void UpdateInputRect(Rectangle rect)
-	{
-		_inputRect = rect;
-	}
 
 	private async void OnTimedEvent(object sender, ElapsedEventArgs e)
 	{
@@ -42,11 +38,9 @@ public class ScreenshotTimerService : IDisposable
 
 	public async Task CaptureAndUploadScreenshot(string fileNamePrefix)
 	{
-		var screenshotService = new ScreenshotService();
-		var bytes = screenshotService.Capture(_inputRect);
-		Debug.WriteLine("got image: " + bytes.Length);
+		var screenshotService = new Screenshotter();
+		var bytes = screenshotService.Capture(InputRect);
 
-		// Save the screenshot to a file on the desktop
 		using (var fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), fileNamePrefix + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png")))
 		{
 			fs.Write(bytes, 0, bytes.Length);
@@ -57,8 +51,6 @@ public class ScreenshotTimerService : IDisposable
 		content.Add(new ByteArrayContent(bytes), "Image", "screenshot.png");
 		content.Add(new StringContent("screenshot"), "Id");
 		var response = await client.PostAsync("http://localhost:5137/image", content);
-		Debug.WriteLine("response: " + response.StatusCode);
-
         screenshotService.Dispose();
 	}
 

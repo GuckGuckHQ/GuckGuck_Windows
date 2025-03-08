@@ -41,7 +41,7 @@ public partial class MainWindow : Window
         var size = new Size(captureBorder.ActualWidth, captureBorder.ActualHeight);
         var inputRect = new System.Drawing.Rectangle((int)topLeft.X, (int)topLeft.Y, (int)size.Width, (int)size.Height);
 
-        _screenshotTimerService.UpdateInputRect(inputRect);
+        _screenshotTimerService.InputRect = inputRect;
     }
 
     private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -66,7 +66,7 @@ public partial class MainWindow : Window
         var screenHeight = (int)SystemParameters.PrimaryScreenHeight;
         var inputRect = new System.Drawing.Rectangle(0, 0, screenWidth, screenHeight);
 
-        _screenshotTimerService.UpdateInputRect(inputRect);
+        _screenshotTimerService.InputRect = inputRect;
         await _screenshotTimerService.CaptureAndUploadScreenshot("fullscreen_screenshot");
     }
 }

@@ -10,7 +10,7 @@ using Resource = SharpDX.DXGI.Resource;
 
 namespace GuckGuck;
 
-public class ScreenshotService : IDisposable
+public class Screenshotter : IDisposable
 {
 	private Factory1 factory;
 	private Adapter1 adapter;
@@ -21,7 +21,7 @@ public class ScreenshotService : IDisposable
 	private Texture2D screenTexture;
 	private OutputDuplication duplicatedOutput;
 
-	public ScreenshotService()
+	public Screenshotter()
 	{
 		factory = new Factory1();
 		adapter = factory.GetAdapter1(0);
@@ -49,7 +49,6 @@ public class ScreenshotService : IDisposable
 
 	public byte[] Capture(Rectangle captureRegion)
 	{
-		// Get the current display scaling factor using PresentationSource
 		PresentationSource source = null;
 		DataBox mapSource = default;
         Rectangle scaledCaptureRegion = default;
@@ -115,7 +114,6 @@ public class ScreenshotService : IDisposable
 			}
 		}
 	}
-
 
 	public void Dispose()
 	{
