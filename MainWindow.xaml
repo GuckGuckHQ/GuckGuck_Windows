@@ -21,14 +21,14 @@
 	</Window.Background>
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="32" />
+			<ColumnDefinition Width="42" />
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" /> <!-- Added new row definition for the bottom bar -->
-		</Grid.RowDefinitions>
+            <RowDefinition Height="42" />
+        </Grid.RowDefinitions>
 		<Border Grid.Row="0" Grid.ColumnSpan="2" Background="#007EA7"
 			MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 			<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
