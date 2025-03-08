@@ -12,7 +12,7 @@
 	<WindowChrome.WindowChrome>
 		<WindowChrome
 			CaptionHeight="1"
-			CornerRadius="0"
+			CornerRadius="12"
 			ResizeBorderThickness="4"
 			GlassFrameThickness="0" />
 	</WindowChrome.WindowChrome>
@@ -21,19 +21,41 @@
 			Opacity="0.05" />
 	</Window.Background>
 	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="32" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" /> <!-- Added new row definition for the bottom bar -->
 		</Grid.RowDefinitions>
-		<Border Grid.Row="0" Background="Gray" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+		<Border Grid.Row="0" Grid.ColumnSpan="2" Background="Gray"
+			MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 			<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
 				Foreground="White" />
 		</Border>
-		<Button Grid.Row="0" Content="Screenshot" HorizontalAlignment="Left" VerticalAlignment="Top"
-			Click="ScreenshotButton_Click" />
-		<Button Grid.Row="0" Content="Fullscreen Capture" HorizontalAlignment="Right"
-			VerticalAlignment="Top"
-			Click="FullscreenCaptureButton_Click" />
-		<Border x:Name="CaptureBorder" Grid.Row="1" BorderBrush="Black" BorderThickness="2" />
+		<StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" Background="Gray"
+			MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+			<Button Content="Screenshot" Width="32" Click="ScreenshotButton_Click" />
+            <Button Content="Fullscreen Capture" Width="32" Click="FullscreenCaptureButton_Click"/>
+
+        </StackPanel>
+		<Border x:Name="CaptureBorder" Grid.Row="1" Grid.Column="1" BorderBrush="Black"
+			BorderThickness="2" />
+		<Grid Grid.Row="2" Grid.ColumnSpan="2" Background="Gray">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<TextBlock x:Name="UrlTextBox" Grid.Column="0" />
+			<Button Content="Visit" Grid.Column="1" />
+			<StackPanel Orientation="Horizontal" Grid.Column="2">
+				<TextBox x:Name="IntervalTextBox" Grid.Column="0" Width="50" />
+				<Button Content="Minutes" />
+				<Button Content="Start" />
+			</StackPanel>
+		</Grid>
 	</Grid>
 </Window>

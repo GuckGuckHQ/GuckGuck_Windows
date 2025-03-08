@@ -50,38 +50,44 @@ public class ScreenshotService : IDisposable
 	public byte[] Capture(Rectangle captureRegion)
 	{
 		// Get the current display scaling factor using PresentationSource
-		var mainWindow = System.Windows.Application.Current.MainWindow;
-		var source = PresentationSource.FromVisual(mainWindow);
-		if (source?.CompositionTarget == null)
+		PresentationSource source = null;
+		DataBox mapSource = default;
+        Rectangle scaledCaptureRegion = default;
+        System.Windows.Application.Current.Dispatcher.Invoke(() =>
 		{
-			throw new InvalidOperationException("Unable to determine the scaling factor.");
-		}
+			var mainWindow = System.Windows.Application.Current.MainWindow;
+			PresentationSource source = PresentationSource.FromVisual(mainWindow);
 
-		var transformToDevice = source.CompositionTarget.TransformToDevice;
-		float scalingFactorX = (float)transformToDevice.M11;
-		float scalingFactorY = (float)transformToDevice.M22;
+			if (source?.CompositionTarget == null)
+			{
+				throw new InvalidOperationException("Unable to determine the scaling factor.");
+			}
+
+			var transformToDevice = source.CompositionTarget.TransformToDevice;
+			float scalingFactorX = (float)transformToDevice.M11;
+			float scalingFactorY = (float)transformToDevice.M22;
 
 
-		Rectangle scaledCaptureRegion = new Rectangle(
-			(int)(captureRegion.Left),
-			(int)(captureRegion.Top),
-			(int)(captureRegion.Width * scalingFactorX),
-			(int)(captureRegion.Height * scalingFactorY)
-		);
+			scaledCaptureRegion = new Rectangle(
+				(int)(captureRegion.Left),
+				(int)(captureRegion.Top),
+				(int)(captureRegion.Width * scalingFactorX),
+				(int)(captureRegion.Height * scalingFactorY)
+			);
 
-		Resource screenResource;
-		OutputDuplicateFrameInformation duplicateFrameInformation;
+			Resource screenResource;
+			OutputDuplicateFrameInformation duplicateFrameInformation;
 
-		duplicatedOutput.TryAcquireNextFrame(500, out duplicateFrameInformation, out screenResource);
-		using (var screenTexture2D = screenResource.QueryInterface<Texture2D>())
-		{
-			device.ImmediateContext.CopyResource(screenTexture2D, screenTexture);
-		}
-		screenResource.Dispose();
-		duplicatedOutput.ReleaseFrame();
+			duplicatedOutput.TryAcquireNextFrame(500, out duplicateFrameInformation, out screenResource);
+			using (var screenTexture2D = screenResource.QueryInterface<Texture2D>())
+			{
+				device.ImmediateContext.CopyResource(screenTexture2D, screenTexture);
+			}
+			screenResource.Dispose();
+			duplicatedOutput.ReleaseFrame();
 
-		var mapSource = device.ImmediateContext.MapSubresource(screenTexture, 0, MapMode.Read, MapFlags.None);
-
+			mapSource = device.ImmediateContext.MapSubresource(screenTexture, 0, MapMode.Read, MapFlags.None);
+		});
 		using (var bitmap = new SKBitmap(textureDesc.Width, textureDesc.Height, SKColorType.Bgra8888, SKAlphaType.Premul))
 		{
 			var sourcePtr = mapSource.DataPointer;
