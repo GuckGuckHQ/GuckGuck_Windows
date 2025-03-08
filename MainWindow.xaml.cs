@@ -20,6 +20,28 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         _screenshotTimerService = new ScreenshotTimerService(5000);
+        this.SizeChanged += MainWindow_SizeChanged;
+        this.LocationChanged += MainWindow_LocationChanged;
+    }
+
+    private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        UpdateInputRect();
+    }
+
+    private void MainWindow_LocationChanged(object sender, EventArgs e)
+    {
+        UpdateInputRect();
+    }
+
+    private void UpdateInputRect()
+    {
+        var captureBorder = CaptureBorder;
+        var topLeft = captureBorder.PointToScreen(new Point(0, 0));
+        var size = new Size(captureBorder.ActualWidth, captureBorder.ActualHeight);
+        var inputRect = new System.Drawing.Rectangle((int)topLeft.X, (int)topLeft.Y, (int)size.Width, (int)size.Height);
+
+        _screenshotTimerService.UpdateInputRect(inputRect);
     }
 
     private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -32,14 +54,9 @@ public partial class MainWindow : Window
 
     private async void ScreenshotButton_Click(object sender, RoutedEventArgs e)
     {
+        UpdateInputRect();
         _screenshotTimerService.Start();
-        var captureBorder = CaptureBorder;
-        var topLeft = captureBorder.PointToScreen(new Point(0, 0));
-        var size = new Size(captureBorder.ActualWidth, captureBorder.ActualHeight);
-        var inputRect = new System.Drawing.Rectangle((int)topLeft.X, (int)topLeft.Y, (int)size.Width, (int)size.Height);
-
-        _screenshotTimerService.UpdateInputRect(inputRect);
-        await _screenshotTimerService.CaptureAndUploadScreenshot(inputRect, "screenshot");
+        await _screenshotTimerService.CaptureAndUploadScreenshot("screenshot");
     }
 
     private async void FullscreenCaptureButton_Click(object sender, RoutedEventArgs e)
@@ -50,6 +67,6 @@ public partial class MainWindow : Window
         var inputRect = new System.Drawing.Rectangle(0, 0, screenWidth, screenHeight);
 
         _screenshotTimerService.UpdateInputRect(inputRect);
-        await _screenshotTimerService.CaptureAndUploadScreenshot(inputRect, "fullscreen_screenshot");
+        await _screenshotTimerService.CaptureAndUploadScreenshot("fullscreen_screenshot");
     }
 }

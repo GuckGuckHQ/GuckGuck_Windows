@@ -37,13 +37,13 @@ public class ScreenshotTimerService : IDisposable
 
 	private async void OnTimedEvent(object sender, ElapsedEventArgs e)
 	{
-		await CaptureAndUploadScreenshot(_inputRect, "timed_screenshot");
+		await CaptureAndUploadScreenshot("timed_screenshot");
 	}
 
-	public async Task CaptureAndUploadScreenshot(Rectangle rect, string fileNamePrefix)
+	public async Task CaptureAndUploadScreenshot(string fileNamePrefix)
 	{
 		var screenshotService = new ScreenshotService();
-		var bytes = screenshotService.Capture(rect);
+		var bytes = screenshotService.Capture(_inputRect);
 		Debug.WriteLine("got image: " + bytes.Length);
 
 		// Save the screenshot to a file on the desktop
