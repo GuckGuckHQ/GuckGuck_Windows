@@ -69,4 +69,43 @@ public partial class MainWindow : Window
         _screenshotTimerService.InputRect = inputRect;
         await _screenshotTimerService.CaptureAndUploadScreenshot("fullscreen_screenshot");
     }
+
+    private void IncreaseInterval_Click(object sender, RoutedEventArgs e)
+    {
+        if (int.TryParse(IntervalTextBox.Text, out int interval))
+        {
+            interval++;
+            IntervalTextBox.Text = interval.ToString();
+        }
+    }
+
+    private void DecreaseInterval_Click(object sender, RoutedEventArgs e)
+    {
+        if (int.TryParse(IntervalTextBox.Text, out int interval) && interval > 0)
+        {
+            interval--;
+            IntervalTextBox.Text = interval.ToString();
+        }
+    }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
+
+    private void UnitButton_Click(object sender, RoutedEventArgs e)
+    {
+        switch (UnitButton.Content.ToString())
+        {
+            case "Seconds":
+                UnitButton.Content = "Minutes";
+                break;
+            case "Minutes":
+                UnitButton.Content = "Hours";
+                break;
+            case "Hours":
+                UnitButton.Content = "Seconds";
+                break;
+        }
+    }
 }
