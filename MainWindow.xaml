@@ -27,16 +27,16 @@
 		</Grid.RowDefinitions>
 		<Border Grid.Row="0" Background="#007EA7"
 			MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
-            <Grid>
-			<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
-				Foreground="White" FontSize="20" FontWeight="Bold" />
-			<Button Content="X" Width="30" Height="30" HorizontalAlignment="Right"
-				VerticalAlignment="Center"
-				Margin="0,0,10,0" Background="Transparent" Foreground="White"
-				BorderBrush="Transparent"
-				Click="CloseButton_Click" />
-            </Grid>
-        </Border>
+			<Grid>
+				<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
+					Foreground="White" FontSize="20" FontWeight="Bold" />
+				<Button Content="X" Width="40" Height="30" HorizontalAlignment="Right"
+					VerticalAlignment="Center"
+					Background="Transparent" Foreground="White"
+					BorderBrush="Transparent"
+					Click="CloseButton_Click" />
+			</Grid>
+		</Border>
 
 		<Border x:Name="CaptureBorder" Grid.Row="1" BorderBrush="#007EA7"
 			BorderThickness="2" Background="Transparent" />
@@ -53,7 +53,7 @@
 				<TextBox x:Name="UrlTextBox" Foreground="White" Grid.Row="1"
 					VerticalAlignment="Center" Margin="5" />
 				<Button Content="Visit" Grid.Column="1" Margin="5" Background="#007EA7" Grid.Row="1"
-					Foreground="White" />
+					Foreground="White" Click="VisitButton_Click" />
 			</Grid>
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
@@ -63,16 +63,19 @@
 				<StackPanel Orientation="Horizontal" Grid.Column="1">
 					<Button Content="-" Background="#007EA7" Foreground="White"
 						Click="DecreaseInterval_Click" Width="32" VerticalContentAlignment="Center" />
-					<TextBox x:Name="IntervalTextBox" Width="50" HorizontalContentAlignment="Center"
+					<TextBox x:Name="IntervalTextBox" Width="50" Text="1"
+						HorizontalContentAlignment="Center"
 						Background="#CCD8DC"
-						Foreground="Black" TextWrapping="NoWrap" />
+						Foreground="Black" TextWrapping="NoWrap"
+						PreviewTextInput="IntervalTextBox_PreviewTextInput" />
 					<Button Content="+" Background="#007EA7" Foreground="White"
 						Click="IncreaseInterval_Click" Width="32" VerticalContentAlignment="Center" />
 					<Button x:Name="UnitButton" Content="Minutes" Background="#007EA7" Width="100"
 						Foreground="White" Click="UnitButton_Click" />
 
 				</StackPanel>
-				<Button Content="Start" HorizontalAlignment="Stretch" Background="#80CED7" />
+				<Button x:Name="StartButton" Content="Start" HorizontalAlignment="Stretch"
+					Background="#80CED7" Click="ScreenshotButton_Click" />
 			</Grid>
 		</Grid>
 	</Grid>
