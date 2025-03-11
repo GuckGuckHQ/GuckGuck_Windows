@@ -27,7 +27,7 @@
 			GlassFrameThickness="0" />
 	</WindowChrome.WindowChrome>
 	<Window.Background>
-		<SolidColorBrush Color="#CCD8DC" Opacity="0.1" />
+		<SolidColorBrush Color="#CCD8DC" Opacity="0.02" />
 	</Window.Background>
 	<Border BorderBrush="#abb1bf" BorderThickness="0.5">
 	<Grid>
