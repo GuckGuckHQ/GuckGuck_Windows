@@ -8,7 +8,9 @@
 	Title="MainWindow" Height="450" Width="800"
 	WindowStyle="None"
 	AllowsTransparency="True"
+	FontFamily="./Fonts/#Overpass Mono Light"
 	ResizeMode="CanResize">
+
 	<Window.Resources>
 		<Storyboard x:Key="PulsateAnimation" RepeatBehavior="Forever" AutoReverse="True">
 			<ColorAnimation
@@ -19,7 +21,7 @@
 	<WindowChrome.WindowChrome>
 		<WindowChrome
 			CaptionHeight="1"
-			CornerRadius="12"
+			CornerRadius="4"
 			ResizeBorderThickness="4"
 			GlassFrameThickness="0" />
 	</WindowChrome.WindowChrome>
@@ -32,12 +34,14 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
-		<Border Grid.Row="0" Background="#007EA7"
+		<Border Grid.Row="0" Background="#1E1E1E"
 			MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 			<Grid>
-				<TextBlock Text="GuckGuck" VerticalAlignment="Center" HorizontalAlignment="Center"
-					Foreground="White" FontSize="20" FontWeight="Bold" />
-				<TextBlock Text="ON AIR" VerticalAlignment="Center" HorizontalAlignment="Left"
+				<Image Source="/Images/logo.png" VerticalAlignment="Center"
+					HorizontalAlignment="Left" Width="80" Margin="0,4" />
+
+				<TextBlock x:Name="OnAirTextBlock" Visibility="Collapsed" Text="ON AIR"
+					VerticalAlignment="Center" HorizontalAlignment="Left"
 					Margin="10,0,0,0" FontSize="12" FontWeight="Bold" Foreground="Red">
 					<TextBlock.Triggers>
 						<EventTrigger RoutedEvent="TextBlock.Loaded">
@@ -53,9 +57,9 @@
 			</Grid>
 		</Border>
 
-		<Border x:Name="CaptureBorder" Grid.Row="1" BorderBrush="#007EA7"
+		<Border x:Name="CaptureBorder" Grid.Row="1" BorderBrush="#41ef90"
 			BorderThickness="2" Background="Transparent" />
-		<Grid Grid.Row="3" Background="#003249">
+		<Grid Grid.Row="3" Background="#1E1E1E">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="Auto" />
@@ -65,10 +69,11 @@
 					<ColumnDefinition Width="*" />
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
-				<TextBox x:Name="UrlTextBox" Foreground="White" Grid.Row="1"
-					VerticalAlignment="Center" Margin="5" />
-				<Button Content="Visit" Grid.Column="1" Margin="5" Background="#007EA7" Grid.Row="1"
-					Foreground="White" Click="VisitButton_Click" />
+				<TextBox x:Name="UrlTextBox" Foreground="White" Grid.Row="1" IsReadOnly="True"
+					VerticalAlignment="Center" Margin="5" Background="#333333" FontSize="13" />
+				<Button Content="Visit" FontSize="13" Grid.Column="1" Margin="5"
+					Background="#41ef90" Grid.Row="1"
+					Foreground="Black" Click="VisitButton_Click" />
 			</Grid>
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
@@ -76,21 +81,33 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 				<StackPanel Orientation="Horizontal" Grid.Column="1">
-					<Button Content="-" Background="#007EA7" Foreground="White"
+					<Button Content="-" Background="#41ef90" Foreground="Black"
+						FontSize="13"
 						Click="DecreaseInterval_Click" Width="32" VerticalContentAlignment="Center" />
-					<TextBox x:Name="IntervalTextBox" Width="50" Text="1"
+					<RichTextBox x:Name="IntervalTextBox" Width="50"
 						HorizontalContentAlignment="Center"
-						Background="#CCD8DC"
-						Foreground="Black" TextWrapping="NoWrap"
-						PreviewTextInput="IntervalTextBox_PreviewTextInput" />
-					<Button Content="+" Background="#007EA7" Foreground="White"
-						Click="IncreaseInterval_Click" Width="32" VerticalContentAlignment="Center" />
-					<Button x:Name="UnitButton" Content="Minutes" Background="#007EA7" Width="100"
-						Foreground="White" Click="UnitButton_Click" />
-
+						Background="#333333"
+						Foreground="White"
+						FontSize="13"
+						PreviewTextInput="IntervalTextBox_PreviewTextInput">
+						<FlowDocument>
+							<Paragraph>
+								<Run x:Name="IntervalRun"
+									FontSize="13"
+									FontFamily="./Fonts/#Overpass Mono Light">1 </Run>
+							</Paragraph>
+						</FlowDocument>
+					</RichTextBox>
+					<Button Content="+" Background="#41ef90" Foreground="Black"
+						Click="IncreaseInterval_Click" Width="32" FontSize="13"
+						VerticalContentAlignment="Center" />
+					<Button x:Name="UnitButton" Content="Minutes" FontSize="13" Background="#41ef90"
+						Width="100"
+						Foreground="Black" Click="UnitButton_Click" />
 				</StackPanel>
-				<Button x:Name="StartButton" Content="Start" HorizontalAlignment="Stretch"
-					Background="#80CED7" Click="ScreenshotButton_Click" />
+				<Button x:Name="StartButton" Content="Start" FontSize="13"
+					HorizontalAlignment="Stretch"
+					Background="#41ef90" Foreground="Black" Click="ScreenshotButton_Click" />
 			</Grid>
 		</Grid>
 	</Grid>

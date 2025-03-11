@@ -8,9 +8,25 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Fonts\overpass-mono-bold.otf" />
+    <None Remove="Fonts\overpass-mono-light.otf" />
+    <None Remove="Fonts\overpass-mono-regular.otf" />
+    <None Remove="Fonts\overpass-mono-semibold.otf" />
+    <None Remove="Images\logo.png" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
 		<PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
 		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Fonts\overpass-mono-bold.otf" />
+	  <Resource Include="Fonts\overpass-mono-light.otf" />
+	  <Resource Include="Fonts\overpass-mono-regular.otf" />
+	  <Resource Include="Fonts\overpass-mono-semibold.otf" />
+	  <Resource Include="Images\logo.png" />
 	</ItemGroup>
 </Project>

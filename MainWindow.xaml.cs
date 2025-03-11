@@ -62,16 +62,19 @@ public partial class MainWindow : Window
         {
             _screenshotTimerService.Stop();
             StartButton.Content = "Start";
+            OnAirTextBlock.Visibility = Visibility.Hidden;
         }
         else
         {
             StartButton.Content = "Stop";
+            OnAirTextBlock.Visibility = Visibility.Visible;
             UpdateInputRect();
             _screenshotTimerService.Start();
             _currentId = Guid.NewGuid().ToString("N");
             await _screenshotTimerService.CaptureAndUploadScreenshot(_currentId);
         }
         _isCapturing = !_isCapturing;
+        
 
 
         UrlTextBox.Text = $"http://guckguck.runasp.net/{_currentId}";
@@ -101,7 +104,7 @@ public partial class MainWindow : Window
 
     private void IncreaseInterval_Click(object sender, RoutedEventArgs e)
     {
-        if (int.TryParse(IntervalTextBox.Text, out int interval))
+        if (int.TryParse(IntervalRun.Text, out int interval))
         {
             interval++;
         }
@@ -113,13 +116,13 @@ public partial class MainWindow : Window
         {
             interval = 1;
         }
-        IntervalTextBox.Text = interval.ToString();
+        IntervalRun.Text = interval.ToString();
         _screenshotTimerService.UpdateInterval(ConvertToMilliseconds(interval));
     }
 
     private void DecreaseInterval_Click(object sender, RoutedEventArgs e)
     {
-        if (int.TryParse(IntervalTextBox.Text, out int interval) && interval > 0)
+        if (int.TryParse(IntervalRun.Text, out int interval) && interval > 0)
         {
             interval--;
         }
@@ -131,7 +134,7 @@ public partial class MainWindow : Window
         {
             interval = 1;
         }
-        IntervalTextBox.Text = interval.ToString();
+        IntervalRun.Text = interval.ToString();
         _screenshotTimerService.UpdateInterval(ConvertToMilliseconds(interval));
     }
 

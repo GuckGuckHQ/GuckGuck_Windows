@@ -1,13 +1,19 @@
 ﻿<Application x:Class="GuckGuck.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:GuckGuck"
-             StartupUri="MainWindow.xaml">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:GuckGuck"
+    ThemeMode="Dark"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextElement}">
+                <Setter Property="TextElement.FontFamily" Value="fonts/#Overpass Mono Light"/>
+
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
