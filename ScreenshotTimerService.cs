@@ -62,7 +62,7 @@ public class ScreenshotTimerService : IDisposable
 		var content = new MultipartFormDataContent();
 		content.Add(new ByteArrayContent(bytes), "Image", "screenshot.png");
 		content.Add(new StringContent(_currentId), "Id");
-		var response = await client.PostAsync("http://localhost:5137/image", content);
+		var response = await client.PostAsync("http://guckguck.runasp.net/image", content);
 		var url = await response.Content.ReadAsStringAsync();
 		Debug.WriteLine(url);
 		screenshotService.Dispose();

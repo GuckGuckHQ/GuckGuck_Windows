@@ -74,7 +74,7 @@ public partial class MainWindow : Window
         _isCapturing = !_isCapturing;
 
 
-        UrlTextBox.Text = $"http://localhost:5137/{_currentId}";
+        UrlTextBox.Text = $"http://guckguck.runasp.net/{_currentId}";
     }
 
     //private async void FullscreenCaptureButton_Click(object sender, RoutedEventArgs e)
