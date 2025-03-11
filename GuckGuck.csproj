@@ -13,13 +13,19 @@
     <None Remove="Fonts\overpass-mono-light.otf" />
     <None Remove="Fonts\overpass-mono-regular.otf" />
     <None Remove="Fonts\overpass-mono-semibold.otf" />
+    <None Remove="Images\add-line.svg" />
+    <None Remove="Images\close-line.svg" />
     <None Remove="Images\logo.png" />
+    <None Remove="Images\share-box-line.svg" />
+    <None Remove="Images\subtract-line.svg" />
+    <None Remove="Images\camera-3-line.svg" />
   </ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="SharpDX.Direct3D11" Version="4.2.0" />
 		<PackageReference Include="SharpDX.Direct2D1" Version="4.2.0" />
 		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+		<PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -27,6 +33,11 @@
 	  <Resource Include="Fonts\overpass-mono-light.otf" />
 	  <Resource Include="Fonts\overpass-mono-regular.otf" />
 	  <Resource Include="Fonts\overpass-mono-semibold.otf" />
+	  <Resource Include="Images\add-line.svg" />
+	  <Resource Include="Images\close-line.svg" />
 	  <Resource Include="Images\logo.png" />
+	  <Resource Include="Images\share-box-line.svg" />
+	  <Resource Include="Images\subtract-line.svg" />
+	  <Resource Include="Images\camera-3-line.svg" />
 	</ItemGroup>
 </Project>

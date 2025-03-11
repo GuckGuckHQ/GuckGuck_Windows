@@ -10,5 +10,4 @@ namespace GuckGuck
     public partial class App : Application
     {
     }
-
 }

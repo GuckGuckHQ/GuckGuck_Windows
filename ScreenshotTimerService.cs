@@ -49,13 +49,14 @@ public class ScreenshotTimerService : IDisposable
 
 	public async Task CaptureAndUploadScreenshot(string id)
 	{
+		Debug.WriteLine("Capture: " + DateTime.Now.ToString());
 		UpdateCurrentId(id);
         var screenshotService = new Screenshotter();
 		var bytes = screenshotService.Capture(InputRect);
 
 		using (var fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), id + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png")))
 		{
-			fs.Write(bytes, 0, bytes.Length);
+			//fs.Write(bytes, 0, bytes.Length);
 		}
 
 		var client = new HttpClient();
@@ -63,8 +64,6 @@ public class ScreenshotTimerService : IDisposable
 		content.Add(new ByteArrayContent(bytes), "Image", "screenshot.png");
 		content.Add(new StringContent(_currentId), "Id");
 		var response = await client.PostAsync("http://guckguck.runasp.net/image", content);
-		var url = await response.Content.ReadAsStringAsync();
-		Debug.WriteLine(url);
 		screenshotService.Dispose();
 	}
 

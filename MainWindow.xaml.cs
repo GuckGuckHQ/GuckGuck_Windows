@@ -75,21 +75,9 @@ public partial class MainWindow : Window
         }
         _isCapturing = !_isCapturing;
         
-
-
         UrlTextBox.Text = $"http://guckguck.runasp.net/{_currentId}";
     }
 
-    //private async void FullscreenCaptureButton_Click(object sender, RoutedEventArgs e)
-    //{
-    //    _screenshotTimerService.Start();
-    //    var screenWidth = (int)SystemParameters.PrimaryScreenWidth;
-    //    var screenHeight = (int)SystemParameters.PrimaryScreenHeight;
-    //    var inputRect = new System.Drawing.Rectangle(0, 0, screenWidth, screenHeight);
-
-    //    _screenshotTimerService.InputRect = inputRect;
-    //    await _screenshotTimerService.CaptureAndUploadScreenshot("fullscreen_screenshot");
-    //}
 
     private void IntervalTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
     {

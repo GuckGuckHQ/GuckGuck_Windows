@@ -11,9 +11,9 @@
                     Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="{x:Type TextElement}">
-                <Setter Property="TextElement.FontFamily" Value="fonts/#Overpass Mono Light"/>
-
+                <Setter Property="TextElement.FontFamily" Value="fonts/#Overpass Mono Light" />
             </Style>
+            <Color x:Key="SystemAccentColor">#ff00ff</Color>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
