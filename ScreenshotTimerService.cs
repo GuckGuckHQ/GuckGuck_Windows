@@ -54,16 +54,17 @@ public class ScreenshotTimerService : IDisposable
         var screenshotService = new Screenshotter();
 		var bytes = screenshotService.Capture(InputRect);
 
-		using (var fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), id + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png")))
-		{
-			//fs.Write(bytes, 0, bytes.Length);
-		}
+		//save screenshot to file
+		//using (var fs = File.OpenWrite(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), id + DateTime.Now.ToString("yyyyMMddHHmmss") + ".png")))
+		//{
+		//	fs.Write(bytes, 0, bytes.Length);
+		//}
 
 		var client = new HttpClient();
 		var content = new MultipartFormDataContent();
 		content.Add(new ByteArrayContent(bytes), "Image", "screenshot.png");
 		content.Add(new StringContent(_currentId), "Id");
-		var response = await client.PostAsync("http://guckguck.runasp.net/image", content);
+		var response = await client.PostAsync($"{Constants.BaseUrl}/image", content);
 		screenshotService.Dispose();
 	}
 

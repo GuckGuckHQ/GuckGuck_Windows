@@ -56,27 +56,32 @@ public partial class MainWindow : Window
         }
     }
 
-    private async void ScreenshotButton_Click(object sender, RoutedEventArgs e)
+private async void ScreenshotButton_Click(object sender, RoutedEventArgs e)
+{
+    if (_isCapturing)
     {
-        if (_isCapturing)
-        {
-            _screenshotTimerService.Stop();
-            StartButton.Content = "Start";
-            OnAirTextBlock.Visibility = Visibility.Hidden;
-        }
-        else
-        {
-            StartButton.Content = "Stop";
-            OnAirTextBlock.Visibility = Visibility.Visible;
-            UpdateInputRect();
-            _screenshotTimerService.Start();
-            _currentId = Guid.NewGuid().ToString("N");
-            await _screenshotTimerService.CaptureAndUploadScreenshot(_currentId);
-        }
-        _isCapturing = !_isCapturing;
-        
-        UrlTextBox.Text = $"http://guckguck.runasp.net/{_currentId}";
+        _screenshotTimerService.Stop();
+        StartButtonTextBlock.Text = "Start";
+        OnAirTextBlock.Visibility = Visibility.Hidden;
     }
+    else
+    {
+		StartButtonTextBlock.Text = "Stop";
+        OnAirTextBlock.Visibility = Visibility.Visible;
+        UpdateInputRect();
+        _screenshotTimerService.Start();
+        
+        var guidPart = Guid.NewGuid().ToString("N");
+        var randomPart = System.IO.Path.GetRandomFileName().Replace(".", "");
+        var timestampPart = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
+        _currentId = $"{guidPart}{randomPart}{timestampPart}";
+        
+        await _screenshotTimerService.CaptureAndUploadScreenshot(_currentId);
+    }
+    _isCapturing = !_isCapturing;
+    
+    UrlTextBox.Text = $"{Constants.BaseUrl}/{_currentId}";
+}
 
 
     private void IntervalTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

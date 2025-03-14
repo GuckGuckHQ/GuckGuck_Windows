@@ -124,7 +124,7 @@
 					HorizontalAlignment="Stretch"
 					Background="#41ef90" Foreground="Black" Click="ScreenshotButton_Click">
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Start" Margin="0,0,12,0" VerticalAlignment="Center" />
+						<TextBlock x:Name="StartButtonTextBlock" Text="Start" Margin="0,0,12,0" VerticalAlignment="Center" />
 						<Image Source="{svgc:SvgImage Source=/Images/camera-3-line.svg, AppName=GuckGuck}" Width="14" Height="14" VerticalAlignment="Center" />
 					</StackPanel>
 
