@@ -11,6 +11,7 @@ namespace GuckGuck;
 public class ScreenshotTimerService : IDisposable
 {
 	private readonly Timer _timer;
+	private readonly HttpClient _client;
 	private string _currentId;
 	public Rectangle InputRect { get; set; }
 
@@ -18,6 +19,7 @@ public class ScreenshotTimerService : IDisposable
 	{
 		_timer = new Timer(interval);
 		_timer.Elapsed += OnTimedEvent;
+		_client = new HttpClient();
 	}
 
 	public void Start()
@@ -37,12 +39,11 @@ public class ScreenshotTimerService : IDisposable
 	}
 
 	public void UpdateCurrentId(string id)
-    {
-        _currentId = id;
-    }
+	{
+		_currentId = id;
+	}
 
-
-    private async void OnTimedEvent(object sender, ElapsedEventArgs e)
+	private async void OnTimedEvent(object sender, ElapsedEventArgs e)
 	{
 		await CaptureAndUploadScreenshot(_currentId);
 	}
@@ -51,7 +52,7 @@ public class ScreenshotTimerService : IDisposable
 	{
 		Debug.WriteLine("Capture: " + DateTime.Now.ToString());
 		UpdateCurrentId(id);
-        var screenshotService = new Screenshotter();
+		var screenshotService = new Screenshotter();
 		var bytes = screenshotService.Capture(InputRect);
 
 		//save screenshot to file
@@ -60,16 +61,16 @@ public class ScreenshotTimerService : IDisposable
 		//	fs.Write(bytes, 0, bytes.Length);
 		//}
 
-		var client = new HttpClient();
 		var content = new MultipartFormDataContent();
 		content.Add(new ByteArrayContent(bytes), "Image", "screenshot.png");
 		content.Add(new StringContent(_currentId), "Id");
-		var response = await client.PostAsync($"{Constants.BaseUrl}/image", content);
+		var response = await _client.PostAsync($"{Constants.BaseUrl}/image", content);
 		screenshotService.Dispose();
 	}
 
 	public void Dispose()
 	{
 		_timer.Dispose();
+		_client.Dispose();
 	}
 }
