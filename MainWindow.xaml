@@ -103,9 +103,9 @@
 						PreviewTextInput="IntervalTextBox_PreviewTextInput">
 						<FlowDocument>
 							<Paragraph>
-								<Run x:Name="IntervalRun"
+                                    <Run x:Name="IntervalRun"
 									FontSize="13"
-									FontFamily="./Fonts/#Overpass Mono Light">1 </Run>
+									FontFamily="./Fonts/#Overpass Mono Light">5</Run>
 							</Paragraph>
 						</FlowDocument>
 					</RichTextBox>

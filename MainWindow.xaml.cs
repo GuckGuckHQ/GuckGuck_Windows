@@ -23,7 +23,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        _screenshotTimerService = new ScreenshotTimerService(5000);
+        _screenshotTimerService = new ScreenshotTimerService(5 * 60 * 1000);
         this.SizeChanged += MainWindow_SizeChanged;
         this.LocationChanged += MainWindow_LocationChanged;
     }
