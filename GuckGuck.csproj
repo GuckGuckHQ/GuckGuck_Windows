@@ -19,6 +19,7 @@
     <None Remove="Images\share-box-line.svg" />
     <None Remove="Images\subtract-line.svg" />
     <None Remove="Images\camera-3-line.svg" />
+    <None Remove="Images\time-line.svg" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -39,5 +40,6 @@
 	  <Resource Include="Images\share-box-line.svg" />
 	  <Resource Include="Images\subtract-line.svg" />
 	  <Resource Include="Images\camera-3-line.svg" />
+	  <Resource Include="Images\time-line.svg" />
 	</ItemGroup>
 </Project>

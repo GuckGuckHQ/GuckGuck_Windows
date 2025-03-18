@@ -116,9 +116,14 @@
 						<Image Source="{svgc:SvgImage Source=/Images/add-line.svg, AppName=GuckGuck}" Width="12" Height="12"/>
 
 					</Button>
-					<Button x:Name="UnitButton" Content="Minutes" FontSize="13" Background="#41ef90"
-						Width="100"
-						Foreground="Black" Click="UnitButton_Click" />
+                        <Button x:Name="UnitButton" FontSize="13" Background="#41ef90"
+						Width="120"
+						Foreground="Black" Click="UnitButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock x:Name="UnitButtonTextBlock" Text="Minutes" Margin="0,0,12,0" VerticalAlignment="Center" />
+                                <Image Source="{svgc:SvgImage Source=/Images/time-line.svg, AppName=GuckGuck}" Width="14" Height="14" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
 				</StackPanel>
 				<Button x:Name="StartButton"  FontSize="13"
 					HorizontalAlignment="Stretch"
