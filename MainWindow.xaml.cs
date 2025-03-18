@@ -133,7 +133,7 @@ private async void ScreenshotButton_Click(object sender, RoutedEventArgs e)
 
     private int ConvertToMilliseconds(int interval)
     {
-        switch (UnitButton.Content.ToString())
+        switch (UnitButtonTextBlock.Text)
         {
             case "Minutes":
                 return interval * 60 * 1000;
@@ -152,16 +152,16 @@ private async void ScreenshotButton_Click(object sender, RoutedEventArgs e)
 
     private void UnitButton_Click(object sender, RoutedEventArgs e)
     {
-        switch (UnitButton.Content.ToString())
+        switch (UnitButtonTextBlock.Text)
         {
             case "Seconds":
-                UnitButton.Content = "Minutes";
+                UnitButtonTextBlock.Text = "Minutes";
                 break;
             case "Minutes":
-                UnitButton.Content = "Hours";
+                UnitButtonTextBlock.Text = "Hours";
                 break;
             case "Hours":
-                UnitButton.Content = "Seconds";
+                UnitButtonTextBlock.Text = "Seconds";
                 break;
         }
     }
